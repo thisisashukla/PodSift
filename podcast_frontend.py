@@ -14,7 +14,7 @@ def main():
     # Dropdown box
     st.sidebar.subheader("Available Podcasts Feeds")
     selected_podcast = st.sidebar.selectbox("Select Podcast", options=available_podcast_info.keys())
-    favourite_podcast = st.sidebar.selectbox("Favourite Podcast", options=[f for f in available_podcast_info.keys() if f['podcast_details']['episode_title'] != selected_podcast['podcast_details']['episode_title']])
+    favourite_podcast = st.sidebar.selectbox("Favourite Podcast", options=[f for f in available_podcast_info.keys() if available_podcast_info[f]['podcast_details']['episode_title'] != available_podcast_info[selected_podcast]['podcast_details']['episode_title']])
 
     if selected_podcast and favourite_podcast:
 
