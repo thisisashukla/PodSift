@@ -48,6 +48,11 @@ def main():
             st.subheader("Podcast Guest Details")
             st.write(podcast_info["podcast_guest"]['summary'])
 
+        # Display recomended for section
+        st.subheader("Recommended For")
+        recomended_for = podcast_info['podcast_recommended_for']
+        st.write(recomended_for)
+
         # Display the five key moments
         st.subheader("Key Moments")
         key_moments = podcast_info['podcast_highlights']
