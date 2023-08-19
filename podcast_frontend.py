@@ -14,10 +14,12 @@ def main():
     # Dropdown box
     st.sidebar.subheader("Available Podcasts Feeds")
     selected_podcast = st.sidebar.selectbox("Select Podcast", options=available_podcast_info.keys())
+    favourite_podcast = st.sidebar.selectbox("Favourite Podcast", options=[f for f in available_podcast_info.keys() if f['podcast_details']['episode_title'] != selected_podcast['podcast_details']['episode_title']])
 
-    if selected_podcast:
+    if selected_podcast and favourite_podcast:
 
         podcast_info = available_podcast_info[selected_podcast]
+        favourite_podcast_info = available_podcast_info[favourite_podcast]
 
         # Right section - Newsletter content
         st.header("Newsletter Content")
@@ -52,6 +54,13 @@ def main():
         st.subheader("Recommended For")
         recomended_for = podcast_info['podcast_recommended_for']
         st.write(recomended_for)
+
+        comparison = compare_transcript(podcast_info['podcast_summary'], favourite_podcast_info['podcast_summary'])
+
+        # Display recommendation
+        st.subheader("Recommended Based on Your Favourite Podcast")
+        st.progress(comparison['recommendation_score'] / 10)
+        st.write(comparison['reason'])
 
         # Display the five key moments
         st.subheader("Key Moments")
@@ -121,6 +130,12 @@ def create_dict_from_json_files(folder_path):
             data_dict[podcast_name] = podcast_info
 
     return data_dict
+
+def compare_transcript(new, favourite):
+
+    f = modal.Function.lookup("corise-podcast-project", "compare_transcript")
+    output = f.call(new, favourite)
+    return output
 
 def process_podcast_info(url):
     f = modal.Function.lookup("corise-podcast-project", "process_podcast")
