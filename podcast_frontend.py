@@ -55,6 +55,9 @@ def main():
         recomended_for = podcast_info['podcast_recommended_for']
         st.write(recomended_for)
 
+        print("New: ", podcast_info['podcast_details']['episode_title'])
+        print("Favourite: ", favourite_podcast_info['podcast_details']['episode_title'])
+
         comparison = compare_transcript(podcast_info['podcast_details']['episode_transcript'], favourite_podcast_info['podcast_details']['episode_transcript'])
 
         # Display recommendation
