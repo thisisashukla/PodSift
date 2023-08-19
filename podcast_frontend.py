@@ -55,14 +55,13 @@ def main():
         recomended_for = podcast_info['podcast_recommended_for']
         st.write(recomended_for)
 
-        print("New: ", podcast_info['podcast_details']['episode_title'])
-        print("Favourite: ", favourite_podcast_info['podcast_details']['episode_title'])
-
         comparison = compare_transcript(podcast_info['podcast_details']['episode_transcript'], favourite_podcast_info['podcast_details']['episode_transcript'])
 
         # Display recommendation
         st.subheader("Recommended Based on Your Favourite Podcast")
         st.progress(comparison['recommendation_score'] / 10)
+        st.write("New: ", podcast_info['podcast_details']['episode_title'])
+        st.write("Favourite: ", favourite_podcast_info['podcast_details']['episode_title'])
         st.write(comparison['reason'])
 
         # Display the five key moments
