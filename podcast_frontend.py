@@ -55,7 +55,7 @@ def main():
         recomended_for = podcast_info['podcast_recommended_for']
         st.write(recomended_for)
 
-        comparison = compare_transcript(podcast_info['podcast_summary'], favourite_podcast_info['podcast_summary'])
+        comparison = compare_transcript(podcast_info['podcast_details']['podcast_transcript'], favourite_podcast_info['podcast_details']['podcast_transcript'])
 
         # Display recommendation
         st.subheader("Recommended Based on Your Favourite Podcast")
